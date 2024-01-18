@@ -177,12 +177,12 @@ public class GrupoController {
             summary = "La API elimina un alumno de un grupo según el ID del alumno y del grupo",
             responses = {
                     @ApiResponse(
-                            responseCode = "200",
+                            responseCode = "204",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Grupo.class))
                     ),
                     @ApiResponse(responseCode = "400", content = @Content),
                     @ApiResponse(responseCode = "401", content = @Content),
-                    @ApiResponse(responseCode = "403", content = @Content),
+                    @ApiResponse(responseCode = "404", content = @Content),
                     @ApiResponse(responseCode = "500", content = @Content)
             }
     )
@@ -195,7 +195,7 @@ public class GrupoController {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body("El alumno con DNI " + dniAlumno + "se ha eliminado correctamente del grupo con ID " + idGrupo);
             } else {
                 // Si no ha eliminado correctamente el alumno del grupo, devuelve código 400 BAD REQUEST
-                return ResponseEntity.badRequest().body("{\"mensaje\": \"No se ha podido eliminar el alumno del grupo, revise los datos introducidos\"}");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"mensaje\": \"No se ha encontrado al alumno con DNI " + dniAlumno + " en el grupo con ID " + idGrupo + " de la asignatura con ID " + idAsignatura);
             }
         } catch (RuntimeException e) {
             // Gestiona la excepción en caso de error en tiempo de ejecución, devolviendo 500 INTERNAL SERVER ERROR

@@ -14,6 +14,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
+/**
+ * Test de integración para el controlador de grupos.
+ */
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 @WithMockUser(username = "profesor", password = "profesor1234", roles = "PROFESOR")
@@ -185,6 +189,6 @@ public class GrupoControllerTests {
         mockMvc.perform(MockMvcRequestBuilders.delete("/asignaturas/1/grupos/1/alumnos?dniAlumno=12345678A").with(csrf()))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
         mockMvc.perform(MockMvcRequestBuilders.delete("/asignaturas/1/grupos/1/alumnos?dniAlumno=98765432B").with(csrf()))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 }

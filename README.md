@@ -2,11 +2,11 @@
 
 # Grupos de Prácticas - Universidad de Murcia
 
-## API para la gestión de grupos de prácticas en asignaturas de la Universidad de Murcia
+#### API para la gestión de grupos de prácticas en asignaturas de la Universidad de Murcia
 
 _Desarrollada por **Salva Roca** para TICARUM_
 
-#### Descripción
+## Descripción
 
 Esta API REST desarrollada en `Spring Boot 2.7.18` y `Java 11` permite la gestión de grupos de prácticas de asignaturas
 en
@@ -20,12 +20,12 @@ profesor y alumno.
 
 * Profesor: puede realizar todas las operaciones CRUD sobre las entidades, puede autenticarse con las siguientes
   credenciales de prueba:
-  * usuario: `profesor`
-  * contraseña `profesor1234`.
+    * usuario: `profesor`
+    * contraseña `profesor1234`.
 * Alumno: puede realizar operaciones de lectura sobre las entidadespuede autenticarse con las siguientes credenciales de
   prueba:
-  * usuario: `alumno`
-  * contraseña `alumno1234`.
+    * usuario: `alumno`
+    * contraseña `alumno1234`.
 
 La aplicación cuenta con tests unitarios para todos los métodos de los controladores, de forma que se puede probar la
 implementación. Los métodos de los controladores con `Swagger OpenAPI`, al que se recomienda acceder con las
@@ -35,9 +35,269 @@ en el proyecto y accesible en el siguiente botón:
 
 [<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/24695878-2c982b7c-7096-43c1-861d-7629e43f17c4?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D24695878-2c982b7c-7096-43c1-861d-7629e43f17c4%26entityType%3Dcollection%26workspaceId%3Dbcc164f4-70ef-4288-b5c5-34c63e8c45f0)
 
-### Base de Datos
+## Base de Datos
 
 La aplicación utiliza una base de datos H2 en memoria, por lo que la información persiste mientras la aplicación esté
 en ejecución. Las operaciones de lectura y escritura se realizan mediante ORM a través de Hibernate con Spring Data JPA.
 El modelo de datos sigue el diagrama mostrado a continuación:
 ![db-diagram.png](db-diagram.png)
+
+## Endpoints, Métodos y Respuestas
+
+La API cuenta con los endpoints listados a continuación, y or norma general, todos los métodos devolverán los siguientes
+errores.
+
+* `401 Unauthorized`: si el usuario no está autenticado.
+* `403 Forbidden`: si el usuario no tiene permisos para realizar la operación.
+* `500 Internal Server Error`: si se produce un error interno en el servidor.
+
+### Asignaturas `/asignaturas/{idAsignatura}`
+
+* `GET`:
+  * Cuerpo del mensaje: vacío.
+  * Respuestas:
+      * `200 OK`: si existe una asignatura con ID `ìdAsignatura`, devuelve los detalles de dicha asignatura, los
+        grupos y los alumnos de cada grupo en un JSON con el siguiente formato:
+    ```json
+    {
+      "codigoAsignatura": "string",
+      "nombreAsignatura": "string",
+      "grupos": [{
+        "codigoGrupo": "string",
+        "alumnos": [{
+        "nombre": "string",
+        "apellidos": "string",
+        "dni": "string"
+        }]
+      }]
+    }
+    ```
+
+    * `404 Not Found`: si no existe ninguna asignatura con ID `ìdAsignatura`.
+* `POST`:
+  * Cuerpo del mensaje:
+    ```json
+    {
+      "codigoAsignatura": "string",
+      "nombreAsignatura": "string",
+      "descripcionAsignatura": "string"
+    }
+    ```
+  * Respuestas:
+    * `201 Created`: si se crea la asignatura correctamente, devuelve los detalles de la asignatura creada en un
+      JSON con el siguiente formato:
+      ```json
+      {
+        "idAsignatura": "integer",
+        "codigoAsignatura": "string",
+        "nombreAsignatura": "string",
+        "descripcionAsignatura": "string",
+        "grupos": null
+      }
+      ```
+    * `400 Bad Request`: si no se proporcionan todos los parámetros necesarios para crear la asignatura o ya existe una 
+      con el mismo `codigoAsignatura`.
+* `PUT`:
+  * Cuerpo del mensaje:
+    ```json
+    {
+      "nombreAsignatura": "string",
+      "descripcionAsignatura": "string"
+    }
+    ```  
+
+  * Respuestas:
+    * `200 Created`: si se crea la asignatura correctamente, devuelve los detalles de la asignatura creada en un
+      JSON con el siguiente formato:
+    ```json
+    {
+    "idAsignatura": "integer",
+    "codigoAsignatura": "string",
+    "nombreAsignatura": "string",
+    "grupos": null
+    }
+    ```
+    * `400 Bad Request`: si no se proporcionan los parámetros necesarios para crear la asignatura (no se admite 
+      modificación parcial).
+    * `404 Not Found`: si no existe ninguna asignatura con ID `ìdAsignatura`.
+* `DELETE`:
+  * Cuerpo del mensaje: vacío.
+  * Respuestas:
+    * `204 No Content`: si se elimina la asignatura correctamente.
+    * `404 Not Found`: si no existe ninguna asignatura con ID `ìdAsignatura`.
+
+### Grupos `/asignaturas/{idAsignatura}/grupos/{idGrupo}`
+* `GET`:
+  * Cuerpo del mensaje: vacío.
+  * Respuestas:
+    * `200 OK`: si existe un grupo con ID `ìdGrupo` en la asignatura con ID `ìdAsignatura`, devuelve los detalles de
+      dicho grupo y los alumnos del mismo en un JSON con el siguiente formato:
+    ```json
+    {
+      "idGrupo": "integer",
+      "codigoGrupo": "string",
+      "nombreGrupo": "string",
+      "alumnos": [{
+        "idAlumno": "integer",
+        "dniAlumno": "string",
+        "nombreAlumno": "string",
+        "apellidosAlumno": "string"
+      }]
+    }
+    ```
+    * `404 Not Found`: si no existe ningún grupo con ID `ìdGrupo` en la asignatura con ID `ìdAsignatura`.
+* `POST`:
+  * Cuerpo del mensaje:
+    ```json
+    {
+      "codigoGrupo": "string",
+      "nombreGrupo": "string"
+    }
+    ```
+  * Respuestas:
+    * `201 Created`: si se crea el grupo correctamente, devuelve los detalles del grupo creado en un JSON con el
+      siguiente formato:
+    ```json
+    {
+      "idGrupo": "integer",
+      "codigoGrupo": "string",
+      "nombreGrupo": "string",
+      "alumnos": null
+    }
+    ```
+    * `400 Bad Request`: si no se proporcionan todos los parámetros necesarios para crear el grupo, no existe ninguna 
+      asignatura con ID `ìdAsignatura`, ya existe un grupo con el mismo `codigoGrupo` o ya existen 5 grupos en dicha
+      asignatura.
+* `PUT`:
+  * Cuerpo del mensaje:
+    ```json
+    {
+      "nombreGrupo": "string"
+    }
+    ```
+  * Respuestas:
+    * `200 Created`: si se modifica el grupo correctamente, devuelve los detalles del grupo creado en un JSON con el
+      siguiente formato:
+    ```json
+    {
+      "idGrupo": "integer",
+      "codigoGrupo": "string",
+      "nombreGrupo": "string",
+      "alumnos": [{
+        "idAlumno": "integer",
+        "dniAlumno": "string",
+        "nombreAlumno": "string",
+        "apellidosAlumno": "string"
+      }]
+    }
+    ```
+    * `400 Bad Request`: si no se proporcionan el parámetro necesario para modificar el grupo.
+    * `404 Not Found`: si no existe ningún grupo con ID `ìdGrupo` en la asignatura con ID `ìdAsignatura`.
+* `POST /alumnos`:
+  * Cuerpo del mensaje:
+    ```json
+    {
+      "dniAlumno": "string",
+      "nombreAlumno": "string",
+      "apellidosAlumno": "string"
+    }
+    ```
+  * Respuestas:
+    * `201 Created`: si añade al alumno correctamente al grupo (bien lo haya creado o bien haya verificado que la 
+      información del alumno coincide con un registro existente), devuelve los detalles del grupo actualizado en un JSON
+      con el siguiente formato:
+    ```json
+    {
+      "idGrupo": "integer",
+      "codigoGrupo": "string",
+      "nombreGrupo": "string",
+      "alumnos": [{
+        "idAlumno": "integer",
+        "dniAlumno": "string",
+        "nombreAlumno": "string",
+        "apellidosAlumno": "string"
+      }]
+    }
+    ```
+    * `400 Bad Request`: si no se proporcionan todos los parámetros necesarios para añadir al alumno, ya existe un 
+      alumno registrado con dicho DNI pero sus datos no coinciden, o no existe ningún grupo con ID `ìdGrupo` en la 
+      asignatura con ID `ìdAsignatura`.
+* `DELETE /alumnos?dniAlumno={dniAlumno}`:
+  * Cuerpo del mensaje: vacío.
+  * Respuestas:
+    * `204 No Content`: si elimina al alumno correctamente del grupo.
+    * `404 Not Found`: si no existe ningún alumno con DNI `dniAlumno` en el grupo con ID `ìdGrupo` en la asignatura con 
+      ID `ìdAsignatura`.
+
+### Alumnos `/alumnos`
+* `GET`:
+  * Cuerpo del mensaje: vacío.
+  * Respuestas:
+    * `200 OK`: devuelve todos los alumnos registrados en un JSON con el siguiente formato:
+    ```json
+    [{
+      "idAlumno": "integer",
+      "dniAlumno": "string",
+      "nombreAlumno": "string",
+      "apellidosAlumno": "string",
+      "grupos": [{
+        "idGrupo": "integer",
+        "codigoGrupo": "string",
+        "nombreGrupo": "string",
+          "asignatura": {
+          "idAsignatura": "integer",
+          "codigoAsignatura": "string",
+          "nombreAsignatura": "string",
+          "descripcionAsignatura": "string"
+        }
+      }]
+    }]
+    ```
+    * `204 No Content`: si no hay ningún alumno registrado.
+* `GET /{idAlumno}`:
+  * Cuerpo del mensaje: vacío.
+  * Respuestas:
+    * `200 OK`: si existe un alumno con ID `idAlumno`, devuelve los detalles de dicho alumno en un JSON con el
+      siguiente formato:
+    ```json
+    {
+      "idAlumno": "integer",
+      "dniAlumno": "string",
+      "nombreAlumno": "string",
+      "apellidosAlumno": "string",
+      "grupos": [{
+        "idGrupo": "integer",
+        "codigoGrupo": "string",
+        "nombreGrupo": "string",
+          "asignatura": {
+            "idAsignatura": "integer",
+            "codigoAsignatura": "string",
+            "nombreAsignatura": "string",
+            "descripcionAsignatura": "string"
+          }
+      }]
+    }
+    ```
+    * `404 Not Found`: si no existe ningún alumno con ID `idAlumno`.
+* `POST`:
+  * Cuerpo del mensaje:
+    ```json
+    {
+      "dniAlumno": "string",
+      "nombreAlumno": "string",
+      "apellidosAlumno": "string"
+    }
+    ```
+  * Respuestas:
+    * `201 Created`: si se crea el alumno correctamente, devuelve los detalles del alumno creado en un JSON con el
+      siguiente formato:
+    ```json
+    {
+      "dniAlumno": "string",
+      "nombreAlumno": "string",
+      "apellidosAlumno": "string",
+      "grupos": "null"
+    }
+    ```
+    * `400 Bad Request`: si no se proporcionan todos los parámetros necesarios para crear el alumno o ya existe un 
+      alumno registrado con dicho DNI.

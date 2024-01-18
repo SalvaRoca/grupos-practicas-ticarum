@@ -12,6 +12,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
+/**
+ * Test de integración para el controlador de alumnos.
+ * IMPORTANTE: realizar tests unitarios POR SEPARADO, al no disponer de métodos para borrado de alumnos, no es posible
+ * establecer condiciones @BeforeEach y @AfterEach para los tests unitarios.
+ */
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 @WithMockUser(username = "profesor", password = "profesor1234", roles = "PROFESOR")
