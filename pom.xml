@@ -9,12 +9,14 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ticarum</groupId>
-	<artifactId>grupos-practicas</artifactId>
+	<artifactId>grupos-practicas-ticarum</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>grupos-practicas</name>
 	<description>Ejercicio práctico para prueba de selección TICARUM 39/2023</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring.version>5.3.31</spring.version>
+		<spring-security.version>5.8.9</spring-security.version>
 	</properties>
 	<dependencies>
 		<dependency>

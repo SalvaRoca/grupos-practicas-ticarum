@@ -49,7 +49,7 @@ public class GrupoController {
                 return ResponseEntity.ok(grupo);
             } else {
                 // Si no existe el grupo con el ID indicado en la asignatura, devuelve código 404 NOT FOUND
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"mensaje\": \"No se encontró el grupo con el ID " + idGrupo + "en la asignatura con el ID " + idAsignatura + "\"}");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"mensaje\": \"No se encontró el grupo con el ID " + idGrupo + " en la asignatura con el ID " + idAsignatura + "\"}");
             }
         } catch (RuntimeException e) {
             // Gestiona la excepción en caso de error en tiempo de ejecución, devolviendo 500 INTERNAL SERVER ERROR
@@ -192,7 +192,7 @@ public class GrupoController {
 
             if (grupo != null) {
                 // Si se ha eliminado correctamente el alumno del grupo, devuelve código 200 OK con el grupo modificado
-                return ResponseEntity.ok(grupo);
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body("El alumno con DNI " + dniAlumno + "se ha eliminado correctamente del grupo con ID " + idGrupo);
             } else {
                 // Si no ha eliminado correctamente el alumno del grupo, devuelve código 400 BAD REQUEST
                 return ResponseEntity.badRequest().body("{\"mensaje\": \"No se ha podido eliminar el alumno del grupo, revise los datos introducidos\"}");
