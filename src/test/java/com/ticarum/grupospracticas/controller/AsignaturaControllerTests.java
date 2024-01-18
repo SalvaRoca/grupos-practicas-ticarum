@@ -29,24 +29,24 @@ public class AsignaturaControllerTests {
                       "  \"descripcionAsignatura\": \"Asignatura de prueba 1\"\n" +
                       "}\n";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/asignaturas/1")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(body)
+        mockMvc.perform(MockMvcRequestBuilders.post("/asignaturas/1")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body)
         );
     }
 
     @AfterEach
     void tearDown() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/asignaturas/1"));
-        mockMvc.perform(MockMvcRequestBuilders.delete("/asignaturas/2"));
+        mockMvc.perform(MockMvcRequestBuilders.delete("/asignaturas/1").with(csrf()));
+        mockMvc.perform(MockMvcRequestBuilders.delete("/asignaturas/2").with(csrf()));
     }
 
     @Test
     void obtenerAsignaturaTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/asignaturas/1"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("{\"idAsignatura\":1,\"codigoAsignatura\":\"ABC123\",\"nombreAsignatura\":\"Prueba 1\",\"descripcionAsignatura\":\"Asignatura de prueba 1\"}"));
         mockMvc.perform(MockMvcRequestBuilders.get("/asignaturas/99"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
@@ -59,12 +59,12 @@ public class AsignaturaControllerTests {
                                      "  \"descripcionAsignatura\": \"Asignatura de prueba 2\"\n" +
                                      "}\n";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/asignaturas/2")
+        mockMvc.perform(MockMvcRequestBuilders.post("/asignaturas/2")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(bodyCodigoExistente)
-        ).andExpect(MockMvcResultMatchers.status().isBadRequest());
+                )
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
         String bodyInfoFaltante = "{\n" +
                                   "  \"codigoAsignatura\": \"ABC123\",\n" +
@@ -84,12 +84,13 @@ public class AsignaturaControllerTests {
                       "  \"descripcionAsignatura\": \"Asignatura de prueba 2\"\n" +
                       "}\n";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/asignaturas/2")
+        mockMvc.perform(MockMvcRequestBuilders.post("/asignaturas/2")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body)
-        ).andExpect(MockMvcResultMatchers.status().isCreated());
+                )
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().json("{\"idAsignatura\":2,\"codigoAsignatura\":\"DEF456\",\"nombreAsignatura\":\"Prueba 2\",\"descripcionAsignatura\":\"Asignatura de prueba 2\"}"));
     }
 
     @Test
@@ -98,31 +99,32 @@ public class AsignaturaControllerTests {
                                   "  \"nombreAsignatura\": \"Prueba 1 modificada\",\n" +
                                   "}\n";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.put("/asignaturas/1")
+        mockMvc.perform(MockMvcRequestBuilders.put("/asignaturas/1")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(bodyInfoFaltante)
-        ).andExpect(MockMvcResultMatchers.status().isBadRequest());
+                )
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
         String body = "{\n" +
                       "  \"nombreAsignatura\": \"Prueba 1 modificada\",\n" +
                       "  \"descripcionAsignatura\": \"Asignatura de prueba 1 modificada\"\n" +
                       "}\n";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.put("/asignaturas/99")
+        mockMvc.perform(MockMvcRequestBuilders.put("/asignaturas/99")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body)
-        ).andExpect(MockMvcResultMatchers.status().isNotFound());
+                )
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.put("/asignaturas/1")
+        mockMvc.perform(MockMvcRequestBuilders.put("/asignaturas/1")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body)
-        ).andExpect(MockMvcResultMatchers.status().isOk());
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("{\"idAsignatura\":1,\"codigoAsignatura\":\"ABC123\",\"nombreAsignatura\":\"Prueba 1 modificada\",\"descripcionAsignatura\":\"Asignatura de prueba 1 modificada\"}"));
     }
 
     @Test

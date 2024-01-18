@@ -29,11 +29,10 @@ public class GrupoControllerTests {
                                 "  \"descripcionAsignatura\": \"Asignatura de prueba 1\"\n" +
                                 "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/asignaturas/1")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(bodyAsignatura)
+        mockMvc.perform(MockMvcRequestBuilders.post("/asignaturas/1")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(bodyAsignatura)
         );
 
         String bodyGrupo = "{\n" +
@@ -41,11 +40,10 @@ public class GrupoControllerTests {
                            "  \"nombreGrupo\": \"Grupo 1\"\n" +
                            "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/asignaturas/1/grupos/1")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(bodyGrupo)
+        mockMvc.perform(MockMvcRequestBuilders.post("/asignaturas/1/grupos/1")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(bodyGrupo)
         );
 
         String bodyAlumno = "{\n" +
@@ -54,11 +52,10 @@ public class GrupoControllerTests {
                             "  \"apellidosAlumno\": \"Apellidos1\"\n" +
                             "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/asignaturas/1/grupos/1/alumnos")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(bodyAlumno)
+        mockMvc.perform(MockMvcRequestBuilders.post("/asignaturas/1/grupos/1/alumnos")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(bodyAlumno)
         );
     }
 
@@ -70,7 +67,8 @@ public class GrupoControllerTests {
     @Test
     void obtenerGrupoTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/asignaturas/1/grupos/1"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("{\"idGrupo\":1,\"codigoGrupo\":\"G1\",\"nombreGrupo\":\"Grupo 1\",\"alumnos\":[{\"idAlumno\":1,\"dniAlumno\":\"12345678A\",\"nombreAlumno\":\"Nombre1\",\"apellidosAlumno\":\"Apellidos1\"}]}"));
         mockMvc.perform(MockMvcRequestBuilders.get("/asignaturas/1/grupos/2"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
@@ -78,40 +76,41 @@ public class GrupoControllerTests {
     @Test
     void crearGrupoTest() throws Exception {
         String bodyCodigoExistente = "{\n" +
-                                     "  \"codigoGrupo\": \"G1\",\n" +
-                                     "  \"nombreGrupo\": \"Grupo 2\"\n" +
+                                     "\"codigoGrupo\": \"G1\",\n" +
+                                     "\"nombreGrupo\": \"Grupo 2\"\n" +
                                      "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/asignaturas/1/grupos/2")
+        mockMvc.perform(MockMvcRequestBuilders.post("/asignaturas/1/grupos/2")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(bodyCodigoExistente)
-        ).andExpect(MockMvcResultMatchers.status().isBadRequest());
+                )
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
 
         String bodyInfoFaltante = "{\n" +
-                                  "  \"codigoGrupo\": \"G2\",\n" +
+                                  "\"codigoGrupo\": \"G2\",\n" +
                                   "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/asignaturas/1/grupos/2")
+        mockMvc.perform(MockMvcRequestBuilders.post("/asignaturas/1/grupos/2")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(bodyInfoFaltante)
-        ).andExpect(MockMvcResultMatchers.status().isBadRequest());
+                )
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
         String bodyOk = "{\n" +
                         "  \"codigoGrupo\": \"G2\",\n" +
                         "  \"nombreGrupo\": \"Grupo 2\"\n" +
                         "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/asignaturas/1/grupos/2")
+        mockMvc.perform(MockMvcRequestBuilders.post("/asignaturas/1/grupos/2")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(bodyOk)
-        ).andExpect(MockMvcResultMatchers.status().isCreated());
+                )
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().json("{\"idGrupo\":2,\"codigoGrupo\":\"G2\",\"nombreGrupo\":\"Grupo 2\",\"alumnos\":null}"));
     }
 
     @Test
@@ -119,31 +118,33 @@ public class GrupoControllerTests {
         String bodyInfoFaltante = "{\n" +
                                   "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.put("/asignaturas/1/grupos/1")
+        mockMvc.perform(MockMvcRequestBuilders.put("/asignaturas/1/grupos/1")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(bodyInfoFaltante)
-        ).andExpect(MockMvcResultMatchers.status().isBadRequest());
+                )
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
         String body = "{\n" +
                       "  \"nombreGrupo\": \"Grupo 2\"\n" +
                       "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.put("/asignaturas/1/grupos/2")
+        mockMvc.perform(MockMvcRequestBuilders.put("/asignaturas/1/grupos/2")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body)
-        ).andExpect(MockMvcResultMatchers.status().isNotFound());
+                )
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
 
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.put("/asignaturas/1/grupos/1")
+        mockMvc.perform(MockMvcRequestBuilders.put("/asignaturas/1/grupos/1")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body)
-        ).andExpect(MockMvcResultMatchers.status().isOk());
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("{\"idGrupo\":1,\"codigoGrupo\":\"G1\",\"nombreGrupo\":\"Grupo 2\",\"alumnos\":[" +
+                                                                "{\"idAlumno\":1,\"dniAlumno\":\"12345678A\",\"nombreAlumno\":\"Nombre1\",\"apellidosAlumno\":\"Apellidos1\"}]}"));
     }
 
     @Test
@@ -154,12 +155,12 @@ public class GrupoControllerTests {
                                   "  \"apellidosAlumno\": \"Apellidos2\"\n" +
                                   "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/asignaturas/1/grupos/1/alumnos")
+        mockMvc.perform(MockMvcRequestBuilders.post("/asignaturas/1/grupos/1/alumnos")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(bodyDniExistente)
-        ).andExpect(MockMvcResultMatchers.status().isBadRequest());
+                )
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
         String body = "{\n" +
                       "  \"dniAlumno\": \"98765432B\",\n" +
@@ -167,12 +168,16 @@ public class GrupoControllerTests {
                       "  \"apellidosAlumno\": \"Apellidos2\"\n" +
                       "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/asignaturas/1/grupos/1/alumnos")
+        mockMvc.perform(MockMvcRequestBuilders.post("/asignaturas/1/grupos/1/alumnos")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body)
-        ).andExpect(MockMvcResultMatchers.status().isOk());
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("{\"idGrupo\":1,\"codigoGrupo\":\"G1\",\"nombreGrupo\":\"Grupo 1\",\"alumnos\":[" +
+                        "{\"idAlumno\":1,\"dniAlumno\":\"12345678A\",\"nombreAlumno\":\"Nombre1\",\"apellidosAlumno\":\"Apellidos1\"}," +
+                        "{\"idAlumno\":2,\"dniAlumno\":\"98765432B\",\"nombreAlumno\":\"Nombre2\",\"apellidosAlumno\":\"Apellidos2\"}" +
+                        "]}"));
     }
 
     @Test

@@ -30,15 +30,15 @@ public class AlumnoControllerTests {
                       "  \"apellidosAlumno\": \"Apellidos1\"\n" +
                       "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/alumnos")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(body)
+        mockMvc.perform(MockMvcRequestBuilders.post("/alumnos")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body)
         );
 
         mockMvc.perform(MockMvcRequestBuilders.get("/alumnos"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("[{\"idAlumno\":1,\"dniAlumno\":\"12345678A\",\"nombreAlumno\":\"Nombre1\",\"apellidosAlumno\":\"Apellidos1\"}]"));
     }
 
     @Test
@@ -52,15 +52,15 @@ public class AlumnoControllerTests {
                       "  \"apellidosAlumno\": \"Apellidos1\"\n" +
                       "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/alumnos")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(body)
+        mockMvc.perform(MockMvcRequestBuilders.post("/alumnos")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body)
         );
 
         mockMvc.perform(MockMvcRequestBuilders.get("/alumnos/1"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("{\"idAlumno\":1,\"dniAlumno\":\"12345678A\",\"nombreAlumno\":\"Nombre1\",\"apellidosAlumno\":\"Apellidos1\"}"));
     }
 
     @Test
@@ -70,12 +70,12 @@ public class AlumnoControllerTests {
                                   "  \"nombreAlumno\": \"Nombre1\"\n" +
                                   "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/alumnos")
+        mockMvc.perform(MockMvcRequestBuilders.post("/alumnos")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(bodyInfoFaltante)
-        ).andExpect(MockMvcResultMatchers.status().isBadRequest());
+                )
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
         String body = "{\n" +
                       "  \"dniAlumno\": \"12345678A\",\n" +
@@ -83,24 +83,25 @@ public class AlumnoControllerTests {
                       "  \"apellidosAlumno\": \"Apellidos1\"\n" +
                       "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/alumnos")
+        mockMvc.perform(MockMvcRequestBuilders.post("/alumnos")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body)
-        ).andExpect(MockMvcResultMatchers.status().isCreated());
+                )
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().json("{\"idAlumno\":1,\"dniAlumno\":\"12345678A\",\"nombreAlumno\":\"Nombre1\",\"apellidosAlumno\":\"Apellidos1\"}"));
 
         String bodyDniExistente = "{\n" +
-                      "  \"dniAlumno\": \"12345678A\",\n" +
-                      "  \"nombreAlumno\": \"Nombre2\",\n" +
-                      "  \"apellidosAlumno\": \"Apellidos2\"\n" +
-                      "}";
+                                  "  \"dniAlumno\": \"12345678A\",\n" +
+                                  "  \"nombreAlumno\": \"Nombre2\",\n" +
+                                  "  \"apellidosAlumno\": \"Apellidos2\"\n" +
+                                  "}";
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/alumnos")
+        mockMvc.perform(MockMvcRequestBuilders.post("/alumnos")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(body)
-        ).andExpect(MockMvcResultMatchers.status().isBadRequest());
+                        .content(bodyDniExistente)
+                )
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 }
