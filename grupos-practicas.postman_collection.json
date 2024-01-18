@@ -1,0 +1,1507 @@
+{
+	"info": {
+		"_postman_id": "40f18f29-438b-4e11-9037-64873da6ea8b",
+		"name": "grupos-practicas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24695878"
+	},
+	"item": [
+		{
+			"name": "Sin autenticar",
+			"item": [
+				{
+					"name": "Crear asignatura 1 (Unauthorized)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoAsignatura\": \"DWFS\",\n    \"nombreAsignatura\": \"Desarrollo Web Full Stack\",\n    \"descripcionAsignatura\": \"Conceptos de programación front-end con React y back-end con Spring\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener asignatura 1 (Unauthorized)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asignaturas/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar asignatura 2 (Unauthorized)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombreAsignatura\": \"Ciberseguridad en Aplicaciones Web\",\n    \"descripcionAsignatura\": \"Conceptos de ciberseguridad en aplicaciones web\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear grupo 1 en asignatura 1 (Unauthorized)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G1\",\n    \"nombreGrupo\": \"Grupo 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener grupo 1 en asignatura 1 (Unauthorized)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G1\",\n    \"nombreGrupo\": \"Grupo 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar grupo 1 en asignatura 1 (Unauthorized)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombreGrupo\": \"Grupo A\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar alumno a grupo 1 (Unauthorized)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dniAlumno\": \"48660012Q\",\n    \"nombreAlumno\": \"Salvador\",\n    \"apellidosAlumno\": \"Roca Guillén\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1/alumnos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1",
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear alumno (Unauthorized)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dniAlumno\": \"48660012Q\",\n    \"nombreAlumno\": \"Salvador\",\n    \"apellidosAlumno\": \"Roca Guillén\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/alumnos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener lista de alumnos (Unauthorized)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dniAlumno\": \"48660012Q\",\n    \"nombreAlumno\": \"Salvador\",\n    \"apellidosAlumno\": \"Roca Guillén\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/alumnos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Elimina alumno de grupo 1 (Unauthorized)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dniAlumno\": \"48660012Q\",\n    \"nombreAlumno\": \"Salvador\",\n    \"apellidosAlumno\": \"Roca Guillén\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1/alumnos?dniAlumno=48660012Q",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1",
+								"alumnos"
+							],
+							"query": [
+								{
+									"key": "dniAlumno",
+									"value": "48660012Q"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Profesor",
+			"item": [
+				{
+					"name": "Crear asignatura 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoAsignatura\": \"DWFS\",\n    \"nombreAsignatura\": \"Desarrollo Web Full Stack\",\n    \"descripcionAsignatura\": \"Conceptos de programación front-end con React y back-end con Spring\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear asignatura 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoAsignatura\": \"CW\",\n    \"nombreAsignatura\": \"Ciberseguridad Web\",\n    \"descripcionAsignatura\": \"Conceptos de ciberseguridad en las organizaciones y las aplicaciones web\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear asignatura 2 (Bad Request)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombreAsignatura\": \"Ciberseguridad Web\",\n    \"descripcionAsignatura\": \"Conceptos de ciberseguridad en las organizaciones y las aplicaciones web\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener asignatura 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asignaturas/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener asignatura 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asignaturas/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener asignatura 3 (Not Found)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asignaturas/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar asignatura 2 (Bad Request)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombreAsignatura\": \"Ciberseguridad Web\",\n    \"descripcionAsignatura\": \"Conceptos de ciberseguridad en las empresas y las aplicaciones web\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar asignatura 2",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombreAsignatura\": \"Ciberseguridad en Aplicaciones Web\",\n    \"descripcionAsignatura\": \"Conceptos de ciberseguridad en aplicaciones web\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar asignatura 2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asignaturas/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar asignatura 3 (Not Found)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asignaturas/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear grupo 1 en asignatura 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G1\",\n    \"nombreGrupo\": \"Grupo 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear grupo 2 en asignatura 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G2\",\n    \"nombreGrupo\": \"Grupo 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear grupo 3 en asignatura 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G3\",\n    \"nombreGrupo\": \"Grupo 3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear grupo 4 en asignatura 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G4\",\n    \"nombreGrupo\": \"Grupo 4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear grupo 5 en asignatura 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G5\",\n    \"nombreGrupo\": \"Grupo 5\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear grupo 6 en asignatura 6 (Bad Request)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G6\",\n    \"nombreGrupo\": \"Grupo 6\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener grupo 1 en asignatura 1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G1\",\n    \"nombreGrupo\": \"Grupo 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener grupo 1 en asignatura 2 (Not Found)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G1\",\n    \"nombreGrupo\": \"Grupo 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/2/grupos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"2",
+								"grupos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener grupo 2 en asignatura 1 (Not Found)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G1\",\n    \"nombreGrupo\": \"Grupo 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar grupo 1 en asignatura 1 (Bad Request)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G1\",\n    \"nombreGrupo\": \"Grupo 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar grupo 1 en asignatura 1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombreGrupo\": \"Grupo A\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar alumno a grupo 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dniAlumno\": \"48660012Q\",\n    \"nombreAlumno\": \"Salvador\",\n    \"apellidosAlumno\": \"Roca Guillén\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1/alumnos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1",
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear alumno",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dniAlumno\": \"48660012Q\",\n    \"nombreAlumno\": \"Salvador\",\n    \"apellidosAlumno\": \"Roca Guillén\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/alumnos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener lista de alumnos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dniAlumno\": \"48660012Q\",\n    \"nombreAlumno\": \"Salvador\",\n    \"apellidosAlumno\": \"Roca Guillén\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/alumnos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Elimina alumno de grupo 1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dniAlumno\": \"48660012Q\",\n    \"nombreAlumno\": \"Salvador\",\n    \"apellidosAlumno\": \"Roca Guillén\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1/alumnos?dniAlumno=48660012Q",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1",
+								"alumnos"
+							],
+							"query": [
+								{
+									"key": "dniAlumno",
+									"value": "48660012Q"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "profesor1234",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "profesor",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Alumno",
+			"item": [
+				{
+					"name": "Crear asignatura 1 (Forbidden)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoAsignatura\": \"DWFS\",\n    \"nombreAsignatura\": \"Desarrollo Web Full Stack\",\n    \"descripcionAsignatura\": \"Conceptos de programación front-end con React y back-end con Spring\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener asignatura 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asignaturas/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener asignatura 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asignaturas/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener asignatura 3 (Not Found)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asignaturas/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar asignatura 2 (Forbidden)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombreAsignatura\": \"Ciberseguridad en Aplicaciones Web\",\n    \"descripcionAsignatura\": \"Conceptos de ciberseguridad en aplicaciones web\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear grupo 1 en asignatura 1 (Forbidden)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G1\",\n    \"nombreGrupo\": \"Grupo 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener grupo 1 en asignatura 1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G1\",\n    \"nombreGrupo\": \"Grupo 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener grupo 1 en asignatura 2 (Not Found)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G1\",\n    \"nombreGrupo\": \"Grupo 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/2/grupos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"2",
+								"grupos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener grupo 2 en asignatura 1 (Not Found)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigoGrupo\": \"G1\",\n    \"nombreGrupo\": \"Grupo 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar grupo 1 en asignatura 1 (Forbidden)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombreGrupo\": \"Grupo A\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar alumno a grupo 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dniAlumno\": \"48660012Q\",\n    \"nombreAlumno\": \"Salvador\",\n    \"apellidosAlumno\": \"Roca Guillén\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1/alumnos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1",
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear alumno",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dniAlumno\": \"48660012Q\",\n    \"nombreAlumno\": \"Salvador\",\n    \"apellidosAlumno\": \"Roca Guillén\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/alumnos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener lista de alumnos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dniAlumno\": \"48660012Q\",\n    \"nombreAlumno\": \"Salvador\",\n    \"apellidosAlumno\": \"Roca Guillén\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/alumnos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Elimina alumno de grupo 1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dniAlumno\": \"48660012Q\",\n    \"nombreAlumno\": \"Salvador\",\n    \"apellidosAlumno\": \"Roca Guillén\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/1/grupos/1/alumnos?dniAlumno=48660012Q",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"1",
+								"grupos",
+								"1",
+								"alumnos"
+							],
+							"query": [
+								{
+									"key": "dniAlumno",
+									"value": "48660012Q"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "alumno1234",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "alumno",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

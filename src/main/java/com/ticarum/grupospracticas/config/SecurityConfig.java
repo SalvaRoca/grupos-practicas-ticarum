@@ -28,6 +28,7 @@ public class SecurityConfig {
                     .requestMatchers(DELETE, "/asignaturas").hasRole("PROFESOR")
                     .requestMatchers("/grupos").hasAnyRole("PROFESOR", "ALUMNO")
                     .requestMatchers("/alumnos").hasAnyRole("PROFESOR", "ALUMNO")
+                    .requestMatchers("/h2-console/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
