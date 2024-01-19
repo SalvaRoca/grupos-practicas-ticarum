@@ -224,6 +224,7 @@ siguientes errores:
 ![grupo-alumno-flowchart.png](grupo-alumno-flowchart.png)
 
 * `POST /alumnos`: permite añadir un alumno al grupo con ID `idGrupo` en la asignatura con ID `ìdAsignatura`. Observaciones:
+  - No se permite que un alumno esté en dos grupos dentro de la misma asignatura.
   - Si no se encuentra un alumno con el `dniAlumno` indicado en la base de datos, se crea un nuevo registro con los 
     datos proporcionados.
   - Si se encuentra un alumno con el `dniAlumno` indicado en la base de datos, se comprueba que los datos proporcionados
