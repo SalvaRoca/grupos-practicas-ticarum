@@ -22,7 +22,7 @@ public class GrupoServiceImpl implements GrupoService {
 
     @Override
     public Grupo obtenerGrupo(Long idAsignatura, Long idGrupo) {
-        return grupoRepository.obtenerGrupo(asignaturaRepository.obtenerAsignatura(idAsignatura), idGrupo);
+        return grupoRepository.obtenerGrupoDeAsignatura(asignaturaRepository.obtenerAsignatura(idAsignatura), idGrupo);
     }
 
     @Override
@@ -30,11 +30,11 @@ public class GrupoServiceImpl implements GrupoService {
         Asignatura asignatura = asignaturaRepository.obtenerAsignatura(idAsignatura);
 
         if (
-                grupoRepository.obtenerGrupo(asignaturaRepository.obtenerAsignatura(idAsignatura), idGrupo) == null // No debe existir un grupo con el mismo ID
-                        && asignatura != null // La asignatura debe existir
-                        && asignatura.getGrupos().size() < 5 // Máximo 5 grupos por asignatura
-                        && grupoDto.getCodigoGrupo() != null // Este atributo con el que se crea el objeto no debe ser null
-                        && grupoDto.getNombreGrupo() != null // Este atributo con el que se crea el objeto no debe ser null
+                grupoRepository.obtenerGrupo(idGrupo) == null // No debe existir un grupo con el mismo ID
+                && asignatura != null // La asignatura debe existir
+                && asignatura.getGrupos().size() < 5 // Máximo 5 grupos por asignatura
+                && grupoDto.getCodigoGrupo() != null // Este atributo con el que se crea el objeto no debe ser null
+                && grupoDto.getNombreGrupo() != null // Este atributo con el que se crea el objeto no debe ser null
         ) {
             // Si se cumplen las condiciones, construimos el nuevo objeto con el patrón Builder y lo guardamos en la base de datos
             Grupo grupo = Grupo.builder()
@@ -69,7 +69,7 @@ public class GrupoServiceImpl implements GrupoService {
     @Override
     public Grupo agregarAlumnoAGrupo(Long idAsignatura, Long idGrupo, AlumnoDto alumnoDto) {
         Asignatura asignatura = asignaturaRepository.obtenerAsignatura(idAsignatura);
-        Grupo grupo = grupoRepository.obtenerGrupo(asignatura, idGrupo);
+        Grupo grupo = grupoRepository.obtenerGrupoDeAsignatura(asignatura, idGrupo);
 
         if (
                 grupo != null // El grupo debe existir
@@ -116,7 +116,7 @@ public class GrupoServiceImpl implements GrupoService {
     @Override
     public Grupo eliminarAlumnoDeGrupo(Long idAsignatura, Long idGrupo, String dniAlumno) {
         Asignatura asignatura = asignaturaRepository.obtenerAsignatura(idAsignatura);
-        Grupo grupo = grupoRepository.obtenerGrupo(asignatura, idGrupo);
+        Grupo grupo = grupoRepository.obtenerGrupoDeAsignatura(asignatura, idGrupo);
 
         if (
                 grupo != null // El grupo debe existir
